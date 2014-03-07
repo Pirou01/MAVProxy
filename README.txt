@@ -16,7 +16,7 @@ I've made ugly hack to made it work on archlinux wich use both python 3 and pyth
 
 Install it with pip2 :
 
-pip2 install https://github.com/Pirou01/MAVProxy/commits/master
+pip2 install https://github.com/Pirou01/MAVProxy/archive/master.zip
 
 License
 -------
