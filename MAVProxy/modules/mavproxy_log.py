@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''log command handling'''
 
 import time, os
@@ -111,7 +111,7 @@ def handle_log_data_missing():
             state.retries += 1
             if len(diff) == 0:
                 break
-    
+
 
 def log_status():
     '''show download status'''

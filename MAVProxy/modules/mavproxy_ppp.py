@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''
 A PPP over MAVLink module
 Andrew Tridgell
@@ -59,7 +59,7 @@ def start_ppp_link():
     # ask mavproxy to add us to the select loop
     mpstate.select_extra[state.ppp_fd] = (ppp_read, state.ppp_fd)
 
-    
+
 def stop_ppp_link():
     '''stop the link'''
     state = mpstate.ppp_state
@@ -94,7 +94,7 @@ def cmd_ppp(args):
         stop_ppp_link()
     elif args[0] == "status":
         mpstate.console.writeln("%u packets %u bytes" % (state.packet_count, state.byte_count))
-        
+
 def init(_mpstate):
     '''initialise module'''
     global mpstate

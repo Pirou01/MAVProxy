@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 ''' simple bottle drop module'''
 
 import time
@@ -37,7 +37,7 @@ def check_drop(m):
         mpstate.drop_state.waiting = False
         mpstate.override_period.force()
         print("drop complete")
-        
+
 
 def init(_mpstate):
     '''initialise module'''

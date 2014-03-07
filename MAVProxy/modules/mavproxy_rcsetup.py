@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''RC min/max setup'''
 
 class rc_state(object):
@@ -27,7 +27,7 @@ class rc_state(object):
 
     def get_cal_min(self, channel):
         return self.rc_cal[channel][0]
-        
+
     def get_cal_max(self, channel):
         return self.rc_cal[channel][1]
 
@@ -90,7 +90,7 @@ def unload():
     if 'rctrim' in mpstate.command_map:
         mpstate.command_map.pop('rctrim')
 
-    
+
 def mavlink_packet(m):
     '''handle an incoming mavlink packet'''
     #do nothing if not caibrating

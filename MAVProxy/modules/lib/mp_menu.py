@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''
 menu handling widgets for wx
 
@@ -19,7 +19,7 @@ class MPMenuGeneric(object):
     def _append(self, menu):
         '''append this menu item to a menu'''
         pass
-    
+
     def __str__(self):
         return "MPMenuGeneric()"
 
@@ -46,7 +46,7 @@ class MPMenuItem(MPMenuGeneric):
         self.name = name
         self.description = description
         self.returnkey = returnkey
-        
+
     def find_selected(self, event):
         '''find the selected menu item'''
         if event.GetId() == self.id():
@@ -72,7 +72,7 @@ class MPMenuCheckbox(MPMenuItem):
     def __init__(self, name, description='', returnkey=None, checked=False):
         MPMenuItem.__init__(self, name, description=description, returnkey=returnkey)
         self.checked = checked
-        
+
     def find_selected(self, event):
         '''find the selected menu item'''
         if event.GetId() == self.id():
@@ -126,7 +126,7 @@ class MPMenuRadio(MPMenuItem):
             if self.items[i] == self.initial:
                 submenu.Check(self.id()+i, True)
         menu.AppendMenu(-1, self.name, submenu)
-        
+
     def __str__(self):
         return "MPMenuRadio(%s,%s,%s,%s)" % (self.name, self.description, self.returnkey, self.get_choice())
 
@@ -137,7 +137,7 @@ class MPMenuSubMenu(MPMenuGeneric):
         MPMenuGeneric.__init__(self)
         self.name = name
         self.items = items
-        
+
     def add(self, items, addto=None):
         '''add more items to a sub-menu'''
         if not isinstance(items, list):
@@ -223,7 +223,7 @@ if __name__ == '__main__':
                                                        items=['Red','Green','Blue']),
                                            MPMenuRadio('Shapes',
                                                        items=['Circle','Square','Triangle'])])])
-    
+
     im.set_menu(menu)
 
     popup = MPMenuSubMenu('A Popup',
@@ -232,7 +232,7 @@ if __name__ == '__main__':
                                  MPMenuItem('Sub3')])
 
     im.set_popup_menu(popup)
-    
+
     while im.is_alive():
         for event in im.events():
             if isinstance(event, MPMenuItem):
@@ -241,4 +241,4 @@ if __name__ == '__main__':
             else:
                 print(event)
         time.sleep(0.1)
-        
+

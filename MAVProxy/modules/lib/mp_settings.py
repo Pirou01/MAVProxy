@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''settings object for MAVProxy modules'''
 
 class MPSettings(object):

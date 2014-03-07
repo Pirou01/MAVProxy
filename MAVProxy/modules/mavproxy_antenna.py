@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''
 antenna pointing module
 Andrew Tridgell
@@ -35,7 +35,7 @@ def cmd_antenna(args):
             print("GCS location %s" % str(state.gcs_location))
         return
     state.gcs_location = (float(args[0]), float(args[1]))
-        
+
 def init(_mpstate):
     '''initialise module'''
     global mpstate

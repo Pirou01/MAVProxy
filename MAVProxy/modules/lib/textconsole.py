@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 """
   MAVProxy default console
@@ -39,7 +39,7 @@ class SimpleConsole():
     def is_alive(self):
         '''check if we are alive'''
         return True
-    
+
 if __name__ == "__main__":
     # test the console
     import time

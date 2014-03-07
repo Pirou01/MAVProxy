@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # Pylint: Disable name warnings
 # pylint: disable-msg=C0103
@@ -242,7 +242,7 @@ class SRTMTile:
         try:
             zipf = zipfile.ZipFile(f, 'r')
         except Exception:
-            raise InvalidTileError(lat, lon)            
+            raise InvalidTileError(lat, lon)
         names = zipf.namelist()
         if len(names) != 1:
             raise InvalidTileError(lat, lon)

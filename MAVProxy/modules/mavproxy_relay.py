@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''relay handling module'''
 
 import time
@@ -59,8 +59,8 @@ def cmd_servo(args):
                                                mavutil.mavlink.MAV_CMD_DO_REPEAT_SERVO, 0,
                                                int(args[1]), int(args[2]), int(args[3]), float(args[4]),
                                                0, 0, 0)
-        
-              
+
+
 
 def init(_mpstate):
     '''initialise module'''

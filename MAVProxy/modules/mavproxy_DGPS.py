@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''
 support for a GCS attached DGPS system
 '''
@@ -25,7 +25,7 @@ def idle_task():
     mpstate.master().mav.gps_inject_data_send(mpstate.status.target_system,
                                               mpstate.status.target_component,
                                               len(data), data)
-    
+
 def name():
     '''return module name'''
     return "DGPS"

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''
 display a image in a subprocess
 Andrew Tridgell

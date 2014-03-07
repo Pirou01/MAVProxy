@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''monitor sensor consistancy'''
 
 import time, math
@@ -38,7 +38,7 @@ def cmd_sensors(args):
         gps_heading = mpstate.status.msgs['GPS_RAW_INT'].cog * 0.01
     else:
         gps_heading = mpstate.status.msgs['GPS_RAW'].hdg
-        
+
     mpstate.console.writeln("heading: %u/%u   alt: %u/%u  r/p: %u/%u speed: %u/%u  thr: %u" % (
         mpstate.status.msgs['VFR_HUD'].heading,
         gps_heading,
@@ -49,7 +49,7 @@ def cmd_sensors(args):
         mpstate.status.msgs['VFR_HUD'].airspeed,
         mpstate.status.msgs['VFR_HUD'].groundspeed,
         mpstate.status.msgs['VFR_HUD'].throttle))
-                     
+
 
 def cmd_speed(args):
     '''enable/disable speed report'''

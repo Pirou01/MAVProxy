@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 '''common mavproxy utility functions'''
 
@@ -57,7 +57,7 @@ def gps_newpos(lat, lon, bearing, distance):
 
 	lat2 = math.asin(math.sin(lat1)*math.cos(dr) +
                          math.cos(lat1)*math.sin(dr)*math.cos(brng))
-	lon2 = lon1 + math.atan2(math.sin(brng)*math.sin(dr)*math.cos(lat1), 
+	lon2 = lon1 + math.atan2(math.sin(brng)*math.sin(dr)*math.cos(lat1),
                                  math.cos(dr)-math.sin(lat1)*math.sin(lat2))
 	return (math.degrees(lat2), wrap_valid_longitude(math.degrees(lon2)))
 
@@ -168,7 +168,7 @@ class UTMGrid:
                 from MAVProxy.modules.lib.ANUGA import lat_long_UTM_conversion
                 (lat, lon) = lat_long_UTM_conversion.UTMtoLL(self.northing, self.easting, self.zone, isSouthernHemisphere=(self.hemisphere=='S'))
                 return (lat, lon)
-                
+
 
 def latlon_to_grid(latlon):
     '''convert to grid reference'''
@@ -187,7 +187,7 @@ def latlon_round(latlon, spacing=1000):
         g.northing = (g.northing // spacing) * spacing
         return g.latlon()
 
-        
+
 def wxToPIL(wimg):
         '''convert a wxImage to a PIL Image'''
         from PIL import Image

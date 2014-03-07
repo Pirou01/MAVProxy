@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 '''
 view a mission log on a map
@@ -101,7 +101,7 @@ def mavflightview(filename):
         if m is None:
             break
         if m.get_type() == 'MISSION_ITEM':
-            wp.set(m, m.seq)            
+            wp.set(m, m.seq)
             continue
         if not mlog.check_condition(opts.condition):
             continue
@@ -125,7 +125,7 @@ def mavflightview(filename):
                 if lng is None:
                     print("Can't find longitude on GPS message")
                     print(m)
-                    break                    
+                    break
         else:
             lat = m.lat * 1.0e-7
             lng = m.lon * 1.0e-7
@@ -182,7 +182,7 @@ def mavflightview(filename):
             multi_map = map
         map.add_object(path_obj)
         if path2_obj is not None:
-            map.add_object(path2_obj)            
+            map.add_object(path2_obj)
         if mission_obj is not None:
             map.add_object(mission_obj)
 

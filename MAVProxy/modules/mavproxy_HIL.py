@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 '''
 HIL module
 Andrew Tridgell
@@ -78,7 +78,7 @@ def check_sim_in():
     except socket.error as e:
         if not e.errno in [ errno.EAGAIN, errno.EWOULDBLOCK ]:
             raise
-        return        
+        return
     if len(pkt) != 17*8 + 4:
         # wrong size, discard it
         print("wrong size %u" % len(pkt))
@@ -109,7 +109,7 @@ def check_sim_in():
                                                                     int(az*1000/9.81))
     except Exception:
         return
-    
+
 
 def scale_channel(ch, value):
     '''scale a channel to 1000/1500/2000'''
@@ -146,8 +146,8 @@ def check_sim_out():
     except socket.error as e:
         if not e.errno in [ errno.ECONNREFUSED ]:
             raise
-        return        
-        
+        return
+
 
 def check_apm_out():
     '''check if we should send new data to the APM'''
@@ -158,4 +158,4 @@ def check_apm_out():
     state.last_apm_send_time = now
     if state.hil_state_msg is not None:
         mpstate.master().mav.send(state.hil_state_msg)
-        
+
