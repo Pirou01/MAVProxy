@@ -12,6 +12,9 @@ from MAVProxy.modules.mavproxy_map import mp_slipmap
 from MAVProxy.modules.lib import mp_util
 from MAVProxy.modules.lib import mp_settings
 
+import wxversion
+wxversion.select(str(2.8))
+
 mpstate = None
 
 class module_state(object):
@@ -113,7 +116,7 @@ def closest_waypoint(latlon):
         return closest
     else:
         return -1
-        
+
 
 def map_callback(obj):
     '''called when an event happens on the slipmap'''
@@ -142,12 +145,12 @@ def map_callback(obj):
             wp = mpstate.status.wploader.wp(state.move_wp)
             (lat, lon) = obj.latlon
             if getattr(mpstate.console, 'ElevationMap', None) is not None:
-                alt1 = mpstate.console.ElevationMap.GetElevation(lat, lon) 
+                alt1 = mpstate.console.ElevationMap.GetElevation(lat, lon)
                 alt2 = mpstate.console.ElevationMap.GetElevation(wp.x, wp.y)
                 wp.z += alt1 - alt2
             wp.x = lat
             wp.y = lon
-            
+
             wp.target_system    = mpstate.status.target_system
             wp.target_component = mpstate.status.target_component
             state.moving_wp = 0
@@ -158,8 +161,8 @@ def map_callback(obj):
                                                                  state.move_wp, state.move_wp)
             print("Moved WP %u to %f, %f at %.1fm" % (state.move_wp, lat, lon, wp.z))
             display_waypoints()
-            
-        
+
+
 
 def unload():
     '''unload module'''
@@ -200,7 +203,7 @@ def draw_lines(callback):
     state = mpstate.map_state
     state.draw_callback = callback
     state.draw_line = []
-    
+
 def mavlink_packet(m):
     '''handle an incoming mavlink packet'''
     state = mpstate.map_state
@@ -256,7 +259,7 @@ def mavlink_packet(m):
         else:
             mpstate.map.add_object(mp_slipmap.SlipClearLayer('Trajectory'))
 
-        
+
     # if the waypoints have changed, redisplay
     if state.wp_change_time != mpstate.status.wploader.last_change:
         state.wp_change_time = mpstate.status.wploader.last_change
@@ -281,4 +284,4 @@ def mavlink_packet(m):
 
     # check for any events from the map
     mpstate.map.check_events()
-    
+

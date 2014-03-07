@@ -7,6 +7,9 @@ Released under the GNU GPL version 3 or later
 
 '''
 
+import wxversion
+wxversion.select(str(2.8))
+
 import sys, os, struct, math, time, socket
 import fnmatch, errno, threading
 import serial, Queue, select
@@ -360,7 +363,7 @@ def cmd_guided(args):
         return
     if latlon is None:
         print("No map click position available")
-        return        
+        return
     altitude = int(args[0])
     print("Guided %s %d" % (str(latlon), altitude))
     mpstate.master().mav.mission_item_send(mpstate.status.target_system,
@@ -509,7 +512,7 @@ def set_home_location():
     mpstate.master().mav.mission_write_partial_list_send(mpstate.status.target_system,
                                                          mpstate.status.target_component,
                                                          0, 0)
-    
+
 
 def cmd_wp(args):
     '''waypoint commands'''
@@ -561,16 +564,16 @@ def cmd_wp(args):
     elif args[0] == "draw":
         if not 'draw_lines' in mpstate.map_functions:
             print("No map drawing available")
-            return        
+            return
         if mpstate.status.wploader.count() == 0:
             print("Need home location - refresh waypoints")
             return
         mpstate.map_functions['draw_lines'](wp_draw_callback)
         print("Drawing waypoints on map")
     elif args[0] == "sethome":
-        set_home_location()        
+        set_home_location()
     elif args[0] == "loop":
-        wp_loop()        
+        wp_loop()
     else:
         print("Usage: wp <list|load|save|set|show|clear|draw|loop>")
 
@@ -1007,7 +1010,7 @@ def cmd_arm(args):
             if (len(args) < 2):
                 print "usage: arm check", checkables
                 return
-            
+
             arming_mask = int(mpstate.mav_param["ARMING_CHECK"])
 
             if (args[1] == "all"):
@@ -1188,7 +1191,7 @@ def process_stdin(line):
         line = mpstate.aliases[cmd]
         args = line.split() + args[1:]
         cmd = args[0]
-        
+
     if cmd == 'help':
         k = command_map.keys()
         k.sort()
@@ -1314,7 +1317,7 @@ def battery_update(SYS_STATUS):
 def battery_report():
     batt_mon = mpstate.mav_param.get('BATT_MONITOR',0)
 
-    #report voltage level only 
+    #report voltage level only
     if batt_mon == 3:
         mpstate.console.set_status('Battery', 'Batt: %.2fV' % (float(mpstate.status.voltage_level) / 1000.0), row=1)
     elif batt_mon == 4:
@@ -1457,7 +1460,7 @@ def master_callback(m, master):
                 say("ARMED")
             else:
                 say("DISARMED")
-        
+
     elif mtype == 'STATUSTEXT':
         if m.text != mpstate.status.last_apm_msg or time.time() > mpstate.status.last_apm_msg_time+2:
             mpstate.console.writeln("APM: %s" % m.text, bg='red')
@@ -1586,7 +1589,7 @@ def master_callback(m, master):
             if rounded_dist != 0:
                 say("%u" % rounded_dist, priority="progress")
             mpstate.status.last_distance_announce = rounded_dist
-    
+
     elif mtype == "GLOBAL_POSITION_INT":
         report_altitude(m.relative_alt*0.001)
 
@@ -1648,7 +1651,7 @@ def process_master(m):
     if len(s) == 0:
         time.sleep(0.1)
         return
-    
+
     if mpstate.logqueue_raw:
         mpstate.logqueue_raw.put(str(s))
 

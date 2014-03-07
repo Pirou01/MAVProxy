@@ -139,7 +139,7 @@ class SlipGrid(SlipObject):
                 spacing *= 10
             else:
                 break
-        
+
         for i in range(count*2+2):
             pos1 = mp_util.gps_newpos(start[0], start[1], 90, i*spacing)
             pos3 = mp_util.gps_newpos(pos1[0], pos1[1], 0, 3*count*spacing)
@@ -491,7 +491,7 @@ class MPSlipMap():
         state.info = {}
         state.need_redraw = True
 
-        self.app = wx.PySimpleApp()
+        self.app = wx.App()
         self.app.frame = MPSlipMapFrame(state=self)
         self.app.frame.Show()
         self.app.MainLoop()
@@ -692,7 +692,7 @@ class MPSlipMapFrame(wx.Frame):
                 if obj.layer in state.layers:
                     state.layers.pop(obj.layer)
                 state.need_redraw = True
-        
+
         if obj is None:
             time.sleep(0.05)
 
@@ -1087,7 +1087,7 @@ if __name__ == "__main__":
         (lat,lon) = flag.split(',')
         icon = sm.icon('flag.png')
         sm.add_object(SlipIcon('icon - %s' % str(flag), (float(lat),float(lon)), icon, layer=3, rotation=0, follow=False))
-            
+
     while sm.is_alive():
         while sm.event_count() > 0:
             obj = sm.get_event()

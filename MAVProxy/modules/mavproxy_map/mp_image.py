@@ -79,7 +79,7 @@ class MPImage():
         self.auto_size = auto_size
         self.menu = None
         self.popup_menu = None
-        
+
         self.in_queue = multiprocessing.Queue()
         self.out_queue = multiprocessing.Queue()
         self.child = multiprocessing.Process(target=self.child_task)
@@ -89,8 +89,8 @@ class MPImage():
         '''child process - this holds all the GUI elements'''
         import wx
         state = self
-        
-        self.app = wx.PySimpleApp()
+
+        self.app = wx.App()
         self.app.frame = MPImageFrame(state=self)
         self.app.frame.Show()
         self.app.MainLoop()
@@ -146,7 +146,7 @@ class MPImage():
         '''check for events, returning one event'''
         if self.out_queue.qsize():
             return self.out_queue.get()
-        return None            
+        return None
 
     def events(self):
         '''check for events a list of events'''
@@ -159,7 +159,7 @@ from PIL import Image
 
 class MPImageFrame(wx.Frame):
     """ The main frame of the viewer
-    """    
+    """
     def __init__(self, state):
         wx.Frame.__init__(self, None, wx.ID_ANY, state.title)
         self.state = state
@@ -170,7 +170,7 @@ class MPImageFrame(wx.Frame):
         self.SetSizer(self.sizer)
         self.Bind(wx.EVT_IDLE, self.on_idle)
         self.Bind(wx.EVT_SIZE, state.panel.on_size)
-        
+
     def on_idle(self, event):
         '''prevent the main loop spinning too fast'''
         state = self.state
@@ -178,14 +178,14 @@ class MPImageFrame(wx.Frame):
 
 class MPImagePanel(wx.Panel):
     """ The image panel
-    """    
+    """
     def __init__(self, parent, state):
         wx.Panel.__init__(self, parent)
         self.frame = parent
         self.state = state
         self.img = None
         self.redraw_timer = wx.Timer(self)
-        self.Bind(wx.EVT_TIMER, self.on_redraw_timer, self.redraw_timer)        
+        self.Bind(wx.EVT_TIMER, self.on_redraw_timer, self.redraw_timer)
         self.Bind(wx.EVT_SET_FOCUS, self.on_focus)
         self.redraw_timer.Start(100)
 
@@ -281,7 +281,7 @@ class MPImagePanel(wx.Panel):
         print h.heap()
         '''
 
-        
+
     def on_redraw_timer(self, event):
         '''the redraw timer ensures we show new map tiles as they
         are downloaded'''
@@ -403,7 +403,7 @@ class MPImagePanel(wx.Panel):
         '''pass events to the parent'''
         state = self.state
         if isinstance(event, wx.MouseEvent):
-            self.on_mouse_event(event)            
+            self.on_mouse_event(event)
         if isinstance(event, wx.KeyEvent):
             self.on_key_event(event)
         if (isinstance(event, wx.MouseEvent) and
@@ -461,7 +461,7 @@ class MPImagePanel(wx.Panel):
         self.dragpos = wx.Point(0, 0)
         self.zoom = 1.0
         self.need_redraw = True
-            
+
 if __name__ == "__main__":
     from optparse import OptionParser
     parser = OptionParser("mp_image.py <file>")
@@ -469,7 +469,7 @@ if __name__ == "__main__":
     parser.add_option("--drag", action='store_true', default=False, help="allow drag")
     parser.add_option("--autosize", action='store_true', default=False, help="auto size window")
     (opts, args) = parser.parse_args()
-    
+
     im = MPImage(mouse_events=True,
                  key_events=True,
                  can_drag = opts.drag,
